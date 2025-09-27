@@ -12,7 +12,8 @@ export const useSiteContent = (section = null) => {
                 setLoading(true);
                 
                 // Try to get content from public endpoint first
-                const response = await fetch('/api/site-content');
+                const baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+                const response = await fetch(`${baseUrl}/api/site-content`);
                 
                 if (response.ok) {
                     const data = await response.json();
@@ -45,7 +46,8 @@ export const useSiteContent = (section = null) => {
         try {
             setLoading(true);
             
-            const response = await fetch('/api/site-content');
+            const baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+            const response = await fetch(`${baseUrl}/api/site-content`);
             
             if (response.ok) {
                 const data = await response.json();

@@ -137,6 +137,10 @@ const {
     updateSellerPaymentPreferences
 } = require('../controller/paymentMethodController');
 const {
+    createPaymentIntent,
+    processPayment
+} = require('../controller/stripePaymentController');
+const {
     getOrderTracking,
     getBuyerOrdersWithTracking,
     updateOrderTracking,
@@ -153,6 +157,15 @@ const {
     getProductStats,
     likeReview
 } = require('../controller/socialFeaturesController');
+
+// Enhanced reviews controller
+const {
+    addEnhancedReview,
+    getEnhancedReviews,
+    markReviewHelpful,
+    reportReview,
+    getReviewStatistics
+} = require('../controller/enhancedReviewsController');
 
 // Contact message controller
 const {
@@ -320,6 +333,10 @@ router.put('/admin/banners/order', authToken, updateBannersOrder);
 router.post('/payment-methods/available', checkMaintenanceMode, getAvailablePaymentMethods);
 router.get('/seller/payment-preferences/:sellerId', checkMaintenanceMode, authToken, getSellerPaymentPreferences);
 router.put('/seller/payment-preferences', checkMaintenanceMode, authToken, updateSellerPaymentPreferences);
+
+// Stripe payment processing routes
+router.post('/create-payment-intent', checkMaintenanceMode, authToken, createPaymentIntent);
+router.post('/process-payment', checkMaintenanceMode, authToken, processPayment);
 
 // Order tracking routes
 router.get('/orders/:orderId/tracking', checkMaintenanceMode, authToken, getOrderTracking);

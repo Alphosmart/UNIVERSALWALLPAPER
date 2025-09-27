@@ -1,5 +1,5 @@
-const Product = require('../models/Product');
-const User = require('../models/User');
+const Product = require('../models/productModel');
+const User = require('../models/userModel');
 
 // Add or update a review with enhanced features
 async function addEnhancedReview(req, res) {

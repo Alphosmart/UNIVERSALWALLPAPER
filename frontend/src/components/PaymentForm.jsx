@@ -84,11 +84,12 @@ const StripePaymentForm = ({ onPaymentSuccess, orderData, totalAmount }) => {
                 }
 
                 // Process payment with your backend
-                const response = await fetch('/api/process-payment', {
+                const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8080'}/api/process-payment`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
+                    credentials: 'include',
                     body: JSON.stringify({
                         paymentMethodId: paymentMethod.id,
                         amount: Math.round(totalAmount * 100), // Convert to cents
